@@ -7,10 +7,23 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 
 class App extends Component {
+  static defaultProps = {
+    clientId: 'bP8E12B352SIfYuf0h3CvlqluTTyTdZL',
+    domain: 'andrwsalcdo-apps.auth0.com'
+  }
+
+  componentWillMount = () => {
+    this.lock = new Auth0Lock(this.props.clientId, this.props.domain); 
+  }
+
+  showLock = () => {
+    this.lock.show(); 
+  }
+  
   render() {
     return (
       <div>
-        <Header />
+        <Header onLoginClick={this.showLock} />
         <Grid>
           <Row>
             <Col xs={12} md={12}>

@@ -1,17 +1,19 @@
 import React from 'react'
 import { Navbar, Nav, NavItem } from 'react-bootstrap'
 
-const Header= () => (
+
+const Header= ({ onLoginClick }) => (
     <Navbar>
-        <Navbar.Header>
-            <Navbar.Brand>
-                React-Auth0
-            </Navbar.Brand>
-        </Navbar.Header>
-        <Nav>
-            <NavItem href="#">Login</NavItem>
-        </Nav>
-    </Navbar>
+            <Navbar.Header>
+                <Navbar.Brand>
+                    React-Auth0
+                </Navbar.Brand>
+            </Navbar.Header>
+            <Nav>
+                <NavItem onClick={onLoginClick} href="#">Login</NavItem>
+            </Nav>
+        </Navbar>
 )
 
 export default Header
+   
