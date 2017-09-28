@@ -55,15 +55,30 @@ class App extends Component {
     this.lock.show(); 
   }
 
+  logout = () => {
+    this.setState((prevState, props) => {
+      return {
+        accessToken: '', 
+        profile: {}
+      }
+    })
+    localStorage.clear(); 
+  }
+  
   render() {
+    const accessToken = this.state.accessToken; 
     return (
       <div>
-        <Header onLoginClick={this.showLock} />
+        <Header 
+          onLoginClick={this.showLock} 
+          accessToken={accessToken}
+          onLogoutClick={this.logout}
+          />
         <Grid>
           <Row>
             <Col xs={12} md={12}>
               {
-                  (this.state.accessToken)   
+                  (accessToken)   
                    ? <Dashboard />
                    : <Home  />
               }
