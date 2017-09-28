@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Auth0Lock from 'auth0-lock'
-import { Grid, Row, Col } from 'react-bootstrap'
+import { Grid, Row } from 'react-bootstrap'
 import Header from './components/Header'
 import Home from './components/Home'
 import Dashboard from './components/Dashboard'
@@ -69,21 +69,23 @@ class App extends Component {
     const accessToken = this.state.accessToken; 
     return (
       <div>
-        <Header 
-          onLoginClick={this.showLock} 
-          accessToken={accessToken}
-          onLogoutClick={this.logout}
-          />
+        <Grid fluid={true}>
+          <Row>
+            <Header 
+              onLoginClick={this.showLock} 
+              accessToken={accessToken}
+              onLogoutClick={this.logout}
+              />
+          </Row>
+        </Grid>
         <Grid>
           <Row>
-            <Col xs={12} md={12}>
-              {
-                  (accessToken)   
-                   ? <Dashboard />
-                   : <Home  />
-              }
-            </Col>
-          </Row>
+            {
+              (accessToken)   
+              ? <Dashboard profile={this.state.profile} />
+              : <Home  />
+            }
+          </Row> 
         </Grid>
       </div>
     );
