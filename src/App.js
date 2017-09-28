@@ -16,13 +16,36 @@ class App extends Component {
       ); 
   }
 
+  componentDidMount = () => {
+    // on authentication 
+    this.lock.on('authenticated', (authResult) => {
+      this.lock.getUserInfo(authResult.accessToken, (error, profile) => {
+          if(error) { console.log(error); return; }
+          this.setUserData(authResult.accessToken, profile); 
+          this.getUserData(); 
+      });
+    });
+  }
 
-    
+  setUserData = (accessToken, profile) => {
+    localStorage.setItem('accessToken', accessToken); 
+    localStorage.setItem('profile', JSON.stringify(profile)); 
+  } 
+  
+  getUserData = () => {
+    if(localStorage.getItem('accessToken') !== null ) {
+      this.setState((prevState, props) => {
+        return {
+          accessToken: localStorage.getItem('accessToken'), 
+          profile: JSON.parse(localStorage.getItem('profile'))
+        } 
+      })
+    }
+  }
+  
   showLock = () => {
     this.lock.show(); 
   }
-  
-
 
   render() {
     return (
