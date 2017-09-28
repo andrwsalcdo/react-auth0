@@ -3,10 +3,18 @@ import Auth0Lock from 'auth0-lock'
 import { Grid, Row, Col } from 'react-bootstrap'
 import Header from './components/Header'
 import Home from './components/Home'
+import Dashboard from './components/Dashboard'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 
 class App extends Component {
+  constructor() {
+    super(); 
+    this.state = {
+      accessToken: '', 
+      profile: {}
+    }
+  }
 
   componentWillMount = () => {
       this.lock = new Auth0Lock(
@@ -54,7 +62,11 @@ class App extends Component {
         <Grid>
           <Row>
             <Col xs={12} md={12}>
-              <Home  />
+              {
+                  (this.state.accessToken)   
+                   ? <Dashboard />
+                   : <Home  />
+              }
             </Col>
           </Row>
         </Grid>
