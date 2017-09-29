@@ -15,7 +15,7 @@ const Dashboard = ({ profile }) => (
         <Col xs={12} sm={3} md={3}>
             <img style={style}
                 src={profile.picture} 
-                alt="profile picture"/>
+                alt="profile"/>
             <h3>{profile.name}</h3>
             <strong>{profile.email}</strong>
         </Col>
